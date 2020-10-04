@@ -41,7 +41,7 @@ export const submit = createAsyncThunk(`${PREFIX}/submit`, async (_, { getState 
   (await axios.post("/api", { email: getState()["myReducer"].email.value })).data
 ))
 
-const slice = default createSlice({
+const slice = createSlice({
   name: PREFIX,
   initialState: {
     ...form.state,
