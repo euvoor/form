@@ -44,11 +44,13 @@ in your **jsx**
 import React from 'react'
 import { useSelector } from '@reduxjs/toolkit'
 import { TextField } from '@material-ui/core'
+import { useDispatch } from 'react-redux'
 
 import { handleChange, handleBlur } from './slice'
 
 function MyComponent() {
-  const { email } = useSelector(state => state)
+  const { email } = useSelector(state => state),
+    dispatch = useDispatch()
 
   return (
     <TextField
