@@ -21,6 +21,7 @@ export default function initState(fields) {
         validate_on_change: false,
         validate_on_blur: true,
         required: true,
+        pattern: null,
         type: undefined,
         oneOf: undefined,
         oneOfEqual: undefined,

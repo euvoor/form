@@ -2,6 +2,28 @@ import Validator from "./Validator"
 import initState from "./initState"
 import types from "./ReTypes"
 
+test("field has a regex pattern", async () => {
+  let state = initState({
+    age: {
+      validator: {
+        pattern: /\d+/
+      }
+    }
+  })
+
+  let validator = new Validator(state)
+  validator.field("age")
+  expect(state.age.error).toBe(true)
+
+  state.age.value = 31
+  validator.field("age")
+  expect(state.age.error).toBe(false)
+
+  state.age.value = "N/A"
+  validator.field("age")
+  expect(state.age.error).toBe(true)
+})
+
 test("field is required", async () => {
   let state = initState({ email: {} })
   let validator = new Validator(state)

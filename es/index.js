@@ -21,6 +21,7 @@ function initState(fields) {
         validate_on_change: false,
         validate_on_blur: true,
         required: true,
+        pattern: null,
         type: undefined,
         oneOf: undefined,
         oneOfEqual: undefined,
@@ -101,6 +102,10 @@ class Validator {
       fails_in = { ...fails_in, ...this._oneOfEqual(value, validator.oneOfEqual) };
     }
 
+    if (_.isNull(validator.pattern) === false) {
+      fails_in = { fails_in, ...this._pattern(value, validator.pattern) };
+    }
+
     let failed = false;
 
     _.forIn(fails_in, (value, key) => {
@@ -110,6 +115,19 @@ class Validator {
     });
 
     return failed
+  }
+
+  /**
+   * Validate a value against the given pattern.
+   *
+   * @param {string} value
+   * @param {Regex}  pattern
+   * @return bool
+   */
+  _pattern(value, pattern) {
+    return {
+      pattern: !pattern.test(value),
+    }
   }
 
   /**
