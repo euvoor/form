@@ -64,7 +64,7 @@ import { TextField } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import { is_disabled } from '@euvoor/form'
 
-import { handleChange, handleBlur } from './slice'
+import { handleChange, handleBlur, submit } from './slice'
 
 function MyComponent() {
   const { email } = useSelector(state => state),
@@ -81,7 +81,12 @@ function MyComponent() {
     />
 
     {/* The save button will be enabled only if the list of given fields passes the validator */}
-    <Button disabled={is_disabled({ email })}>save</Button>
+    <Button
+      onClick={() => dispatch(submit())}
+      disabled={is_disabled({ email })}
+    >
+      SAVE
+    </Button>
   )
 }
 
