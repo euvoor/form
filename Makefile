@@ -17,6 +17,7 @@ publish:
 		&& npm publish --access public; \
 	elif [[ $$REPLY =~ ^[Aa] ]]; then \
 		echo \
+		&& npm run build \
 		&& git add . \
 		&& read -p "Commit message: " COMMIT_MSG \
 		&& git commit -m "$$COMMIT_MSG" \
