@@ -1,38 +1,5 @@
 import _ from 'lodash';
 
-/**
- * Generate standardized form fields state values.
- *
- * @param {object} fields
- */
-function initState(fields) {
-  let state = {
-    _pending: false,
-    _rejected: false,
-  };
-
-  _.forIn(fields, (value, key) => {
-    state[key] = {
-      value: "",
-      name: key,
-      helper_text: "",
-      error: false,
-      validator: {
-        validate_on_change: false,
-        validate_on_blur: true,
-        required: true,
-        type: undefined,
-        oneOf: undefined,
-        oneOfEqual: undefined,
-      },
-    };
-
-    state[key] = _.merge(state[key], value);
-  });
-
-  return state
-}
-
 const re_types = {
   RE_TYPE_EMAIL: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 };
@@ -162,6 +129,75 @@ class Validator {
   }
 }
 
+/**
+ * Generate standardized form fields state values.
+ *
+ * @param {object} fields
+ */
+function initState(fields) {
+  let state = {
+    _pending: false,
+    _rejected: false,
+  };
+
+  _.forIn(fields, (value, key) => {
+    state[key] = {
+      value: "",
+      name: key,
+      helper_text: "",
+      error: false,
+      validator: {
+        validate_on_change: false,
+        validate_on_blur: true,
+        required: true,
+        type: undefined,
+        oneOf: undefined,
+        oneOfEqual: undefined,
+      },
+    };
+
+    state[key] = _.merge(state[key], value);
+  });
+
+  return state
+}
+
+/**
+ * Check if disabled attribute can be set or not.
+ *
+ * @param {object} fields
+ *   list of fields to be validated before setting disabled attribute. field
+ *   must be given as returned by initState()
+ */
+function is_disabled(fields) {
+  const validator = new Validator(fields);
+  let disabled = false;
+
+  _.forIn(fields, (value, key) => {
+    if (validator.try_field(key) === true) {
+      disabled = true;
+      return false
+    }
+  });
+
+  return disabled
+}
+
+/**
+ * Check if given fields have no errors.
+ *
+ * @param {array} fields
+ */
+function is_fields_ok(state, fields) {
+  for (let i = 0; i < fields.length; i ++) {
+    if (state[fields[i]].error) {
+      return false
+    }
+  }
+
+  return true
+}
+
 var reducers = {
   /**
    * onChange event.
@@ -221,4 +257,4 @@ const {
 } = types;
 
 export default index;
-export { TYPE_EMAIL };
+export { TYPE_EMAIL, is_disabled, is_fields_ok };

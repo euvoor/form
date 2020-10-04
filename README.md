@@ -71,4 +71,23 @@ function MyComponent() {
 export default React.memo(MyComponent)
 ```
 
+# Options
+
+```javascript
+{
+  value: "",
+  name: "NAME_OF_THE_FIELD",
+  helper_text: "",
+  error: false,
+  validator: {
+    validate_on_change: false,
+    validate_on_blur: true,
+    required: true,
+    type: undefined,
+    oneOf: undefined,
+    oneOfEqual: undefined,
+  },
+}
+```
+
 That's it ;)
