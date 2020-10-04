@@ -83,8 +83,10 @@ export default class Validator {
    * @return bool
    */
   _pattern(value, pattern) {
+    const re = new RegExp(JSON.parse(pattern).rgx)
+
     return {
-      pattern: !pattern.test(value),
+      pattern: !re.test(value),
     }
   }
 

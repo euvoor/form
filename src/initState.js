@@ -28,6 +28,12 @@ export default function initState(fields) {
       },
     }
 
+    let pattern = _.get(value, "validator.pattern")
+
+    if (pattern) {
+      value.validator.pattern = JSON.stringify({ rgx: pattern.source })
+    }
+
     state[key] = _.merge(state[key], value)
   })
 
