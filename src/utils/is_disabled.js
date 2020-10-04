@@ -1,6 +1,6 @@
-import _ from 'lodash'
+import _ from "lodash"
 
-import Validator from '../Validator'
+import Validator from "../Validator"
 
 /**
  * Check if disabled attribute can be set or not.

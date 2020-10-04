@@ -1,4 +1,4 @@
-import initState from './initState.js'
+import initState from "./initState"
 
 test("empty state", () => {
   expect(initState({})).toStrictEqual({

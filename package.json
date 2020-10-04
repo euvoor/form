@@ -1,6 +1,6 @@
 {
   "name": "@euvoor/form",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Light form (Validation, events..) that integrates nicely with @reduxjs/toolkit",
   "main": "es/index.js",
   "scripts": {

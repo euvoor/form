@@ -1,8 +1,8 @@
-import { types } from './Validator'
-import initState from './initState'
-import is_disabled from './utils/is_disabled'
-import is_fields_ok from './utils/is_fields_ok'
-import reducers from './reducers'
+import initState from "./initState"
+import is_disabled from "./utils/is_disabled"
+import is_fields_ok from "./utils/is_fields_ok"
+import reducers from "./reducers"
+import types from "./ReTypes"
 
 export default function(fields) {
   return {
@@ -12,10 +12,7 @@ export default function(fields) {
 }
 
 export {
+  types,
   is_disabled,
   is_fields_ok,
 }
-
-export const {
-  TYPE_EMAIL,
-} = types

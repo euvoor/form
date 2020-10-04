@@ -1,12 +1,47 @@
 import _ from 'lodash';
 
-const re_types = {
-  RE_TYPE_EMAIL: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+/**
+ * Generate standardized form fields state values.
+ *
+ * @param {object} fields
+ */
+function initState(fields) {
+  let state = {
+    _pending: false,
+    _rejected: false,
+  };
+
+  _.forIn(fields, (value, key) => {
+    state[key] = {
+      value: "",
+      name: key,
+      helper_text: "",
+      error: false,
+      validator: {
+        validate_on_change: false,
+        validate_on_blur: true,
+        required: true,
+        type: undefined,
+        oneOf: undefined,
+        oneOfEqual: undefined,
+      },
+    };
+
+    state[key] = _.merge(state[key], value);
+  });
+
+  return state
+}
+
+const re_types  = {
+  email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 };
 
-const types = {
-  TYPE_EMAIL: "RE_TYPE_EMAIL"
-};
+let types = {};
+
+_.forIn(re_types, (value, key) => {
+  types[key] = key;
+});
 
 class Validator {
   constructor(state) {
@@ -55,7 +90,7 @@ class Validator {
     }
 
     if (_.isUndefined(validator.type) === false) {
-      fails_in = { ...fails_in, ...this._type(value, validator.type) };
+      fails_in = { ...fails_in, ...this._re_type(validator.type, value) };
     }
 
     if (_.isArray(validator.oneOf)) {
@@ -107,13 +142,13 @@ class Validator {
    * @param {string} value
    * @param {string} type
    */
-  _type(value, re) {
+  _re_type(type_name, value) {
     if (_.isEmpty(_.trim(value))) {
       return { type: false }
     }
 
     return {
-      type: !re_types[re].test(value)
+      type: !re_types[type_name].test(value)
     }
   }
 
@@ -127,39 +162,6 @@ class Validator {
       required: _.isEmpty(_.trim(value))
     }
   }
-}
-
-/**
- * Generate standardized form fields state values.
- *
- * @param {object} fields
- */
-function initState(fields) {
-  let state = {
-    _pending: false,
-    _rejected: false,
-  };
-
-  _.forIn(fields, (value, key) => {
-    state[key] = {
-      value: "",
-      name: key,
-      helper_text: "",
-      error: false,
-      validator: {
-        validate_on_change: false,
-        validate_on_blur: true,
-        required: true,
-        type: undefined,
-        oneOf: undefined,
-        oneOfEqual: undefined,
-      },
-    };
-
-    state[key] = _.merge(state[key], value);
-  });
-
-  return state
 }
 
 /**
@@ -252,9 +254,5 @@ function index(fields) {
   }
 }
 
-const {
-  TYPE_EMAIL,
-} = types;
-
 export default index;
-export { TYPE_EMAIL, is_disabled, is_fields_ok };
+export { is_disabled, is_fields_ok, types };

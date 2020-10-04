@@ -1,5 +1,6 @@
-import Validator, { types } from './Validator.js'
-import initState from './initState.js'
+import Validator from "./Validator"
+import initState from "./initState"
+import types from "./ReTypes"
 
 test("field is required", async () => {
   let state = initState({ email: {} })
@@ -18,7 +19,7 @@ test("field is of type email", () => {
     email: {
       validator: {
         required: false,
-        type: types.TYPE_EMAIL,
+        type: types.email,
       }
     }
   })
@@ -42,7 +43,7 @@ test("field of type email is required", async () => {
     email: {
       validator: {
         required: true,
-        type: types.TYPE_EMAIL,
+        type: types.email,
       }
     }
   })
@@ -106,7 +107,7 @@ test("try field validator", async () => {
   let state = initState({
     email: {
       validator: {
-        type: types.TYPE_EMAIL,
+        type: types.email,
       }
     }
   })

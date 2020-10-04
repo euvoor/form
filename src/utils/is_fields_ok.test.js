@@ -1,13 +1,13 @@
-import { types } from '../Validator.js'
-import reducers from '../reducers'
-import is_fields_ok from './is_fields_ok.js'
-import initState from '../initState.js'
+import initState from "../initState"
+import is_fields_ok from "./is_fields_ok"
+import reducers from "../reducers"
+import types from "../ReTypes"
 
 test("check if the given fields ok", async () => {
   let state = initState({
     email: {
       validator: {
-        type: types.TYPE_EMAIL,
+        type: types.email,
       }
     },
     agree: {

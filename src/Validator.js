@@ -1,12 +1,6 @@
-import _ from 'lodash'
+import _ from "lodash"
 
-const re_types = {
-  RE_TYPE_EMAIL: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-}
-
-export const types = {
-  TYPE_EMAIL: "RE_TYPE_EMAIL"
-}
+import { re_types } from "./ReTypes"
 
 export default class Validator {
   constructor(state) {
@@ -55,7 +49,7 @@ export default class Validator {
     }
 
     if (_.isUndefined(validator.type) === false) {
-      fails_in = { ...fails_in, ...this._type(value, validator.type) }
+      fails_in = { ...fails_in, ...this._re_type(validator.type, value) }
     }
 
     if (_.isArray(validator.oneOf)) {
@@ -107,13 +101,13 @@ export default class Validator {
    * @param {string} value
    * @param {string} type
    */
-  _type(value, re) {
+  _re_type(type_name, value) {
     if (_.isEmpty(_.trim(value))) {
       return { type: false }
     }
 
     return {
-      type: !re_types[re].test(value)
+      type: !re_types[type_name].test(value)
     }
   }
 

@@ -1,12 +1,12 @@
-import is_disabled from './is_disabled.js'
-import initState from '../initState.js'
-import { types } from '../Validator.js'
+import initState from "../initState"
+import is_disabled from "./is_disabled"
+import types from "../ReTypes"
 
 test("disabled is true by default", async () => {
   let state = initState({
     email: {
       validator: {
-        type: types.TYPE_EMAIL,
+        type: types.email,
       },
     },
     agree: {
