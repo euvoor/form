@@ -38,7 +38,7 @@ const form = Form({
 
 export const submit = createAsyncThunk(`${PREFIX}/submit`, async (_, { getState }) => (
   // Get email value using: state.email.value
-  (await axios.post("/api", { email: getState()["myReducer"].email.value })).data
+  (await axios.post("/api", { email: getState().email.value })).data
 ))
 
 const slice = createSlice({
