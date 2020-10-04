@@ -1,4 +1,8 @@
-Light weight form validator built specifically for `@reduxjs/toolkit` `createSlice`
+Light weight form validator that **DOES NOT STAND IN YOUR WAY** built for `@reduxjs/toolkit`
+
+> Use react-redux the same way you used to, and let @euvoor/form magically
+> handles the rest for you. (validation, state updates, events..) the data
+> will be available to you when you need it on the state.
 
 # Install
 
@@ -8,12 +12,22 @@ npm i @euvoor/form
 
 # Usage
 
+The following example is a typical day to day workflow
+
+1. initialize the state.
+2. update the ui.
+3. submit the data after its validated.
+
 in your **slice**
 
 ```javascript
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import Form, { TYPE_EMAIL } from '@euvoor/form'
+import axios from 'axios'
 
+const PREFIX = "some.name"
+
+// See below for more options:
 const form = Form({
   email: {
     validator: {
@@ -22,14 +36,19 @@ const form = Form({
   },
 })
 
+export const submit = createAsyncThunk(`${PREFIX}/submit`, async (_, { getState }) => (
+  // Get email value using: state.email.value
+  (await axios.post("/api", { email: getState()["myReducer"].email.value })).data
+))
+
 const slice = default createSlice({
-  name: "some.name",
+  name: PREFIX,
   initialState: {
     ...form.state,
   },
   reducers: {
     ...form.reducers,
-  }
+  },
 })
 
 export const { handleChange, handleBlur } = slice.actions
