@@ -45,6 +45,7 @@ import React from 'react'
 import { useSelector } from '@reduxjs/toolkit'
 import { TextField } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
+import { is_disabled } from '@euvoor/form'
 
 import { handleChange, handleBlur } from './slice'
 
@@ -61,6 +62,9 @@ function MyComponent() {
       error={email.error}
       helperText={email.helper_text}
     />
+
+    {/* The save button will be enabled only if the list of given fields passes the validator */}
+    <Button disabled={is_disabled({ email })}>save</Button>
   )
 }
 

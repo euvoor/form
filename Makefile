@@ -6,7 +6,7 @@ watch:
 	npm run watch
 
 publish:
-	@read -p "Did you increase npm version? " -n 1 -r; \
+	@read -p "Did you increase npm version? (y/n/a) " -n 1 -r; \
 	if [[ $$REPLY =~ ^[Yy] ]]; then \
 		echo \
 		&& git add . \
@@ -15,6 +15,12 @@ publish:
 		&& git push \
 		&& npm run build \
 		&& npm publish --access public; \
+	elif [[ $$REPLY =~ ^[Aa] ]]; then \
+		echo \
+		&& git add . \
+		&& read -p "Commit message: " COMMIT_MSG \
+		&& git commit -m "$$COMMIT_MSG" \
+		&& git push; \
 	else \
 		echo; \
 	fi
