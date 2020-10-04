@@ -10,7 +10,7 @@ npm i @euvoor/form
 
 in your **slice**
 
-```
+```javascript
 import { createSlice } from '@reduxjs/toolkit'
 import Form, { TYPE_EMAIL } from '@euvoor/form'
 
@@ -22,13 +22,11 @@ const form = Form({
   },
 })
 
-const initialState = {
-  ...form.state,
-}
-
 const slice = default createSlice({
   name: "some.name",
-  initialState,
+  initialState: {
+    ...form.state,
+  },
   reducers: {
     ...form.reducers,
   }
