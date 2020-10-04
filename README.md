@@ -22,7 +22,7 @@ in your **slice**
 
 ```javascript
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import Form, { TYPE_EMAIL } from '@euvoor/form'
+import Form, { types } from '@euvoor/form'
 import axios from 'axios'
 
 const PREFIX = "some.name"
@@ -31,7 +31,7 @@ const PREFIX = "some.name"
 const form = Form({
   email: {
     validator: {
-      type: TYPE_EMAIL,
+      type: types.email,
     }
   },
 })
