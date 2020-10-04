@@ -1,0 +1,30 @@
+{
+  "name": "@euvoor/form",
+  "version": "1.0.0",
+  "description": "Light form (Validation, events..) that integrates nicely with @reduxjs/toolkit",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest",
+    "watch": "npm test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/euvoor/form.git"
+  },
+  "author": "Oussama Elgoumri <euvoor@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/euvoor/form/issues"
+  },
+  "homepage": "https://github.com/euvoor/form#readme",
+  "dependencies": {
+    "lodash": "^4.17.20"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "rollup": "^2.28.2"
+  }
+}
