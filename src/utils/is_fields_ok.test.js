@@ -1,6 +1,6 @@
 import { types } from '../Validator.js'
 import reducers from '../reducers'
-import isFieldsOk from './isFieldsOk.js'
+import is_fields_ok from './is_fields_ok.js'
 import initState from '../initState.js'
 
 test("check if the given fields ok", async () => {
@@ -21,10 +21,10 @@ test("check if the given fields ok", async () => {
   const fields = ["email", "agree"]
 
   reducers.validateOnly(state, { payload: fields })
-  expect(isFieldsOk(state, fields)).toBe(false)
+  expect(is_fields_ok(state, fields)).toBe(false)
 
   state.email.value = "euvoor@gmail.com"
   state.agree.value = "yes"
   reducers.validateOnly(state, { payload: fields })
-  expect(isFieldsOk(state, fields)).toBe(true)
+  expect(is_fields_ok(state, fields)).toBe(true)
 })

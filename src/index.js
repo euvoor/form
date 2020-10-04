@@ -11,6 +11,9 @@ export default function(fields) {
   }
 }
 
+export { is_disabled } from './utils/is_disabled'
+export { is_fields_ok } from './utils/is_fields_ok'
+
 export const {
   TYPE_EMAIL,
 } = types
