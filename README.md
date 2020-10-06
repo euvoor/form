@@ -97,17 +97,18 @@ export default React.memo(MyComponent)
 
 ```javascript
 {
-  value: "",
-  name: "NAME_OF_THE_FIELD",
-  helper_text: "",
-  error: false,
+  value: "",                        // Default value to use for the field.
+  name: "NAME_OF_THE_FIELD",        // Name of the field.
+  helper_text: "",                  // Text to show for the field.
+  error: false,                     // Does the field has valid data.
   validator: {
-    validate_on_change: false,
-    validate_on_blur: true,
-    required: true,
-    type: undefined,
-    oneOf: undefined,
-    oneOfEqual: undefined,
+    validate_on_change: false,      // Validate the field on change.
+    validate_on_blur: true,         // Validate the field on blur.
+    required: true,                 // The field is required.
+    pattern: null,                  // A regex pattern to validate the field.
+    type: undefined,                // Type of the field.
+    oneOf: undefined,               // The filed value should be one the given values.
+    oneOfEqual: undefined,          // The field value should be one of the given values.
   },
 }
 ```
