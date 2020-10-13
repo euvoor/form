@@ -1,10 +1,7 @@
 import initState from "./initState"
 
 test("empty state", () => {
-  expect(initState({})).toStrictEqual({
-    _pending: false,
-    _rejected: false,
-  })
+  expect(initState({})).toStrictEqual({ })
 })
 
 test("field with a single validator", () => {
@@ -16,8 +13,6 @@ test("field with a single validator", () => {
     },
   }))
   .toStrictEqual({
-    _pending: false,
-    _rejected: false,
     name: {
       value: "",
       name: "name",
@@ -41,8 +36,6 @@ test("generate default state", () => {
     name: { },
   }))
   .toStrictEqual({
-    _pending: false,
-    _rejected: false,
     name: {
       value: "",
       name: "name",
@@ -80,8 +73,6 @@ test("override default state values", () => {
     },
   }))
   .toStrictEqual({
-    _rejected: false,
-    _pending: false,
     name: {
       value: "Oussama Elgoumri",
       name: "fullname",

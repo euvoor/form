@@ -6,10 +6,7 @@ import _ from "lodash"
  * @param {object} fields
  */
 export default function initState(fields) {
-  let state = {
-    _pending: false,
-    _rejected: false,
-  }
+  let state = { }
 
   _.forIn(fields, (value, key) => {
     state[key] = {
