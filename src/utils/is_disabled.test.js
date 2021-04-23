@@ -1,4 +1,4 @@
-import initState from "../initState"
+import { initState } from "../initState"
 import is_disabled from "./is_disabled"
 import types from "../ReTypes"
 

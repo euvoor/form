@@ -1,5 +1,5 @@
 import Validator from "./Validator"
-import initState from "./initState"
+import { initState } from "./initState"
 import types from "./ReTypes"
 
 test("field has a regex pattern", async () => {
